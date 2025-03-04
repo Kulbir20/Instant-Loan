@@ -1,5 +1,5 @@
 const InstantLoan = require('../models/instantLoan');
-const OTP = require('../models/Otp');
+const OTP = require('../Models/otp');
 
 exports.sendOtp = async (req, res) => {
   try {
@@ -14,7 +14,8 @@ exports.sendOtp = async (req, res) => {
     const otpCode = 1234
     
 
-    await OTP.create({ userId: user._id, otpCode, expiresAt: Date.now() + 5 * 60 * 1000 });
+    const otp=new OTP({ userId: user._id, otpCode, expiresAt: Date.now() + 5 * 60 * 1000 });
+    await otp.save();
     
     res.status(200).json({ message: 'OTP sent successfully', userId: user._id });
   } catch (error) {
