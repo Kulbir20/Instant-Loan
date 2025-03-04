@@ -50,8 +50,8 @@ exports.verifyOTP = async (req, res) => {
     res.status(200).json({
       message: 'Authentication successful',
       userId: user._id,
-      isNewUser: !user.fullName || !user.email, 
-      ...(user.fullName && user.email && { token: user.generateAuthToken() }),
+      isNewUser: !user.firstName || !user.email, 
+      ...(user.firstName && user.email && { token: user.generateAuthToken() }),
     });
   } catch (error) {
     console.error('OTP Verification Error:', error);
